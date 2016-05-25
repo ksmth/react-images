@@ -233,22 +233,35 @@ class Lightbox extends Component {
 			sizes = '100vw';
 		}
 
+		let content;
+		if (image.src.indexOf('.mp4') !== -1) {
+			content = (
+				<video controls className={classes.image}>
+					<source src={image.src} type="video/mp4" />
+				</video>
+			);
+		} else {
+			content = (
+				<img className={classes.image}
+					onClick={this.handleImageClick}
+					sizes={sizes}
+					src={image.src}
+					srcSet={srcset}
+					style={{
+						cursor: this.props.onClickImage ? 'pointer' : 'auto',
+						maxHeight: windowHeight,
+					}}
+				/>
+			);
+		}
+
 		return (
 			<figure key={`image ${currentImage}`}
 				className={classes.figure}
 				style={{ maxWidth: this.props.width }}
 				>
 				<Swipeable onSwipedLeft={this.gotoNext} onSwipedRight={this.gotoPrev}>
-					<img className={classes.image}
-						onClick={this.handleImageClick}
-						sizes={sizes}
-						src={image.src}
-						srcSet={srcset}
-						style={{
-							cursor: this.props.onClickImage ? 'pointer' : 'auto',
-							maxHeight: windowHeight,
-						}}
-					/>
+					{content}
 				</Swipeable>
 				{this.renderFooter(images[currentImage].caption)}
 			</figure>

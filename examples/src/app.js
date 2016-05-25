@@ -18,6 +18,12 @@ const IMAGE_MAP = IMAGE_NAMES.map(img => ({
 	],
 	caption: capitalizeFirstLetter(img),
 }));
+
+IMAGE_MAP.push({
+	src: 'http://www.quirksmode.org/html5/videos/big_buck_bunny.mp4',
+	thumbnail: './images/thumbnail-cat.jpg',
+});
+
 const IMAGES_PRELOAD = IMAGE_MAP.map(img => {
 	return <img key={img.caption} src={`./images/1024-${img}.jpg`} />;
 });
