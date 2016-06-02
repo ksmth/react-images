@@ -236,7 +236,7 @@ class Lightbox extends Component {
 		let content;
 		if (image.type === 'video') {
 			content = (
-				<video controls className={classes.image}>
+				<video controls autoPlay className={classes.image}>
 					<source src={image.src} type="video/mp4" />
 				</video>
 			);
