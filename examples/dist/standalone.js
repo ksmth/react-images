@@ -472,10 +472,10 @@ var Lightbox = (function (_Component) {
 			}
 
 			var content = undefined;
-			if (image.src.indexOf('.mp4') !== -1) {
+			if (image.type === 'video') {
 				content = _react2['default'].createElement(
 					'video',
-					{ controls: true, className: classes.image },
+					{ controls: true, autoPlay: true, className: classes.image },
 					_react2['default'].createElement('source', { src: image.src, type: 'video/mp4' })
 				);
 			} else {

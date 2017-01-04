@@ -61,7 +61,9 @@ var Fade = (function (_Component) {
 		}
 	}, {
 		key: 'componentDidLeave',
-		value: function componentDidLeave() {}
+		value: function componentDidLeave() {
+			// empty
+		}
 	}, {
 		key: '_showElement',
 		value: function _showElement() {
@@ -469,6 +471,26 @@ var Lightbox = (function (_Component) {
 				sizes = '100vw';
 			}
 
+			var content = undefined;
+			if (image.type === 'video') {
+				content = _react2['default'].createElement(
+					'video',
+					{ controls: true, autoPlay: true, className: classes.image },
+					_react2['default'].createElement('source', { src: image.src, type: 'video/mp4' })
+				);
+			} else {
+				content = _react2['default'].createElement('img', { className: classes.image,
+					onClick: this.handleImageClick,
+					sizes: sizes,
+					src: image.src,
+					srcSet: srcset,
+					style: {
+						cursor: this.props.onClickImage ? 'pointer' : 'auto',
+						maxHeight: windowHeight
+					}
+				});
+			}
+
 			return _react2['default'].createElement(
 				'figure',
 				{ key: 'image ' + currentImage,
@@ -478,16 +500,7 @@ var Lightbox = (function (_Component) {
 				_react2['default'].createElement(
 					_reactSwipeable2['default'],
 					{ onSwipedLeft: this.gotoNext, onSwipedRight: this.gotoPrev },
-					_react2['default'].createElement('img', { className: classes.image,
-						onClick: this.handleImageClick,
-						sizes: sizes,
-						src: image.src,
-						srcSet: srcset,
-						style: {
-							cursor: this.props.onClickImage ? 'pointer' : 'auto',
-							maxHeight: windowHeight
-						}
-					})
+					content
 				),
 				this.renderFooter(images[currentImage].caption)
 			);
